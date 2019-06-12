@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+        android:background="#f6f5ec" >
+     <ImageView 
+       android:layout_width="104dp"
+    	android:layout_height="106dp"
+    	android:src="@drawable/dogfeet"
+    	android:layout_gravity="right" />
+   
+   <ImageView 
+       android:id="@+id/uploadimage"
+        android:layout_width="150dp"
+    	android:layout_height="150dp"
+    	android:src="@drawable/icon_def"
+    	android:layout_gravity="center_horizontal"
+    	android:layout_marginTop="0dp"/>
+
+    <RelativeLayout 
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center_horizontal"
+    	>
+    	 <Button 
+        android:id="@+id/imageupload"
+        android:layout_width="wrap_content"
+    	android:layout_height="30dp"
+    	android:text="UPLOAD" 
+    	android:background="#d4ad9f"
+    	android:textSize="15sp"
+    	
+    	android:layout_centerHorizontal="true"/>
+   		 <TextView 
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="SKIP"
+    	android:textColor="#d1a99b"
+    	android:layout_toRightOf="@id/imageupload"
+    	android:layout_alignBottom="@id/imageupload"
+    	android:layout_marginLeft="20dp"/>
+     
+     
+      </RelativeLayout>
+      <Button 
+          android:id="@+id/next2"
+          android:layout_width="wrap_content"
+    	android:layout_height="40dp"
+    	android:background="#9d847b"
+    	android:text="NEXT"
+    	android:layout_marginTop="30dp"
+    	android:layout_gravity="center_horizontal"/>
+      <ImageView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/ofuro_no_bg" 
+    	android:layout_gravity="left"/>
+
+
+</LinearLayout>

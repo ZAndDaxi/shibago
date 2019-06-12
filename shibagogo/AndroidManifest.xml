@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.shibacon.shibagogo"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FriendList"
+            android:label="@string/title_activity_friend_list" >
+        </activity>
+        <activity
+            android:name=".MissionList"
+            android:label="@string/title_activity_mission_list" >
+        </activity>
+        <activity
+            android:name=".MissionContent"
+            android:label="@string/title_activity_mission_content" >
+        </activity>
+        <activity
+            android:name=".InitializeImage"
+            android:label="@string/title_activity_initialize_image" >
+        </activity>
+        <activity
+            android:name=".LogIn"
+            android:label="@string/title_activity_log_in" >
+        </activity>
+        <activity
+            android:name=".Newuser"
+            android:label="@string/title_activity_newuser" >
+        </activity>
+        <activity
+            android:name=".QRCode"
+            android:label="@string/title_activity_qrcode" >
+        </activity>
+    </application>
+
+</manifest>

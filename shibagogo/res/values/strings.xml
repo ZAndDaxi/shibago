@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">shibagogo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_friend_list">FriendList</string>
+    <string name="title_activity_mission_list">MissionList</string>
+    <string name="title_activity_mission_content">MissionContent</string>
+    <string name="title_activity_initialize_image">InitializeImage</string>
+    <string name="title_activity_log_in">LogIn</string>
+    <string name="title_activity_newuser">Newuser</string>
+    <string name="title_activity_qrcode">QRCode</string>
+
+</resources>

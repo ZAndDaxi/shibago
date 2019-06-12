@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F5EC" >
+    
+     <TextView
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
+        android:text="1.よく学校へ行きますか？"
+        android:textSize="20sp"
+        android:paddingTop="50dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/editText1"
+        android:layout_centerHorizontal="true"  >
+
+        <RadioButton
+            android:id="@+id/btnYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginTop="5dp"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/btnNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="NO" />
+
+    </RadioGroup>
+    
+      <TextView
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
+        android:text="2.よく野菜を食べますか？"
+        android:textSize="20sp"
+        android:paddingTop="150dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/editText2"
+        android:layout_centerHorizontal="true"  >
+
+        <RadioButton
+            android:id="@+id/btnYes2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginTop="5dp"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/btnNo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="NO" />
+
+    </RadioGroup>
+    
+    <TextView
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
+        android:text="3.よくお肉を食べますか？"
+        android:textSize="20sp"
+        android:paddingTop="250dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/editText3"
+        android:layout_centerHorizontal="true"  >
+
+        <RadioButton
+            android:id="@+id/btnYes3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginTop="5dp"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/btnNo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="NO" />
+
+    </RadioGroup>
+    
+    <TextView
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
+        android:text="4.よく運動しますか？         "
+        android:textSize="20sp"
+        android:paddingTop="350dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/editText4"
+        android:layout_centerHorizontal="true"  >
+
+        <RadioButton
+            android:id="@+id/btnYes4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginTop="5dp"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/btnNo4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="NO" />
+
+    </RadioGroup>
+    
+        <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="#9D847B"
+        android:textSize="15sp"
+        android:text="submit"
+        android:layout_below="@id/radioGroup4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+    
+    
+    
+    
+    
+
+</RelativeLayout>

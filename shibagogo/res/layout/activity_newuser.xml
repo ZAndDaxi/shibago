@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f5ec"
+    android:gravity="center_horizontal"
+
+    tools:context="com.shibacon.shibagogo.Newuser" >
+
+    
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/dogfeet" 
+  		android:layout_alignParentTop="true"
+  		android:layout_alignParentRight="true"/>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        
+        android:gravity="center"
+        android:orientation="vertical" 
+        android:layout_marginTop="120dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:inputType="textPersonName"
+            android:text="Welcome"
+            android:textColor="#9D847B"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/mailaddress1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="Mail address" />
+
+        <EditText
+            android:id="@+id/password1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Password"
+            android:password="true" />
+
+        <Button
+            android:id="@+id/nexttoimage"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="#9d847b"
+            android:text="next"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ofuro_no_bg" />
+
+
+</RelativeLayout>
