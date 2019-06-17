@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 public class User {  //用户信息
 	private String mailAddr;
 	private String password;
-	private Bitmap image;
+	private String image;
 	private int []ini= {1,1,1,1};
 	public User(String mailaddr,String pass) {
 		// TODO Auto-generated constructor stub
@@ -14,6 +14,20 @@ public class User {  //用户信息
 	}
 	public void setMailAddr(String mailAddr) {
 		this.mailAddr = mailAddr;
+	}
+	
+	public String getMailAddr() {
+		return mailAddr;
+	}
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setImage(String str) {
+		this.image=str;
+	}
+	public String getImage() {
+		return image;
 	}
 	public void setPassword(String password) {
 		this.password = password;

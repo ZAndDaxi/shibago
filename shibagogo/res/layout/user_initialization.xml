@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F5EC" >
-    
+    android:background="#F6F5EC" 
+    android:orientation="vertical">
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
      <TextView
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:text="1.よく学校へ行きますか？"
-        android:textSize="20sp"
-        android:paddingTop="50dp" />
+        android:text="よく学校へ行きますか？"
+        android:textSize="18sp"
+        android:paddingTop="50dp"
+        android:textColor="#542B1D" />
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -27,17 +32,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:layout_marginTop="5dp"
-            android:text="YES" />
+            android:layout_marginTop="10dp"
+            android:text="YES" 
+            android:textColor="#542B1D"
+            android:layout_marginRight="15dp"/>
 
         <RadioButton
             android:id="@+id/btnNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="NO" />
+            android:layout_marginTop="10dp"
+            android:text="NO"
+            android:textColor="#542B1D" />
 
     </RadioGroup>
+    
+    </RelativeLayout>
+    
+    <RelativeLayout 
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
     
       <TextView
         android:id="@+id/editText2"
@@ -45,9 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:text="2.よく野菜を食べますか？"
-        android:textSize="20sp"
-        android:paddingTop="150dp" />
+        android:text="よく野菜を食べますか？"
+        android:textSize="18sp"
+        android:paddingTop="35dp"
+        android:textColor="#542B1D" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
@@ -55,34 +71,44 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/editText2"
-        android:layout_centerHorizontal="true"  >
+        android:layout_centerHorizontal="true" 
+         >
 
         <RadioButton
             android:id="@+id/btnYes2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:layout_marginTop="5dp"
-            android:text="YES" />
+            android:layout_marginTop="10dp"
+            android:text="YES" 
+            android:layout_marginRight="15dp"
+            android:textColor="#542B1D" />
 
         <RadioButton
             android:id="@+id/btnNo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="NO" />
+            android:layout_marginTop="10dp"
+            android:text="NO"
+            android:textColor="#542B1D" />
 
     </RadioGroup>
+    </RelativeLayout>
     
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
     <TextView
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:text="3.よくお肉を食べますか？"
-        android:textSize="20sp"
-        android:paddingTop="250dp" />
+        android:text="よくお肉を食べますか？"
+        android:textSize="18sp"
+        android:paddingTop="35dp"
+        android:textColor="#542B1D" />
 
     <RadioGroup
         android:id="@+id/radioGroup3"
@@ -97,17 +123,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:layout_marginTop="5dp"
-            android:text="YES" />
+            android:layout_marginTop="10dp"
+            android:text="YES"
+            android:layout_marginRight="15dp"
+            android:textColor="#542B1D" />
 
         <RadioButton
             android:id="@+id/btnNo3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="NO" />
+            android:layout_marginTop="10dp"
+            android:text="NO"
+            android:textColor="#542B1D" />
 
     </RadioGroup>
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
     
     <TextView
         android:id="@+id/editText4"
@@ -115,9 +149,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:text="4.よく運動しますか？         "
-        android:textSize="20sp"
-        android:paddingTop="350dp" />
+        android:text="よく運動しますか？"
+        android:textSize="18sp"
+        android:paddingTop="35dp"
+        android:textColor="#542B1D" />
 
     <RadioGroup
         android:id="@+id/radioGroup4"
@@ -132,17 +167,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:layout_marginTop="5dp"
-            android:text="YES" />
+            android:layout_marginTop="10dp"
+            android:text="YES"
+            android:layout_marginRight="15dp"
+            android:textColor="#542B1D" />
 
         <RadioButton
             android:id="@+id/btnNo4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="NO" />
+            android:layout_marginTop="10dp"
+            android:text="NO"
+            android:textColor="#542B1D" />
 
     </RadioGroup>
+    </RelativeLayout>
     
         <Button
         android:id="@+id/button_submit"
@@ -153,11 +192,12 @@
         android:text="submit"
         android:layout_below="@id/radioGroup4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp" 
+        android:layout_gravity="center_horizontal" />
     
     
     
     
     
 
-</RelativeLayout>
+</LinearLayout>

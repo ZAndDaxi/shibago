@@ -1,7 +1,17 @@
 package com.shibacon.shibagogo;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.json.JSONObject;
+
+import com.shibacon.utils.StreamUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +25,7 @@ import android.widget.Toast;
 public class LogIn extends Activity {
 	private EditText ed_addr = null;
 	private EditText ed_pwd =null;
+	private Handler handler=new Handler() {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +80,8 @@ public class LogIn extends Activity {
 					return;
 				}
 			}
-			private boolean Canfind(String miladdr,String pwd) {
-				
-				return false;
-			}
+			
+			
 
 			private boolean canfind(String mailaddr, String pwd) {
 				if(mailaddr.equals("xing@a")&&pwd.equals("test")) {
@@ -81,10 +90,73 @@ public class LogIn extends Activity {
 					return false;
 				}
 			}
-		});
+		});	
+	}
+	private boolean LoginRequest(final String maila,final String pwd) {
+		new Thread() {public void run() {
+			HttpURLConnection conn=null;
+			try {
+				String path="";
+				JSONObject userJSON=new JSONObject();
+				userJSON.put("userMailAddress",maila);//String
+				userJSON.put("userPassword", pwd);
+				String content=String.valueOf(userJSON);
+				
+				URL url=new URL(path);
+				
+				conn=(HttpURLConnection)url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.setDoOutput(true);
+				conn.setRequestProperty("User-Agent", "Fiddler");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setRequestProperty("Charset", "UTF-8");
+				OutputStream os=conn.getOutputStream();
+				os.write(content.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					
+				    String result=StreamUtils.readStream(is);
+				    android.os.Message msg=android.os.Message.obtain();
+				    msg.obj=result;
+				    handler.sendMessage(msg);
+					
+					
+				}
+				
+				
+				} catch (Exception e) {
+				e.printStackTrace();
+				}finally{
+					if(conn!=null)
+						conn.disconnect();
+				}//String
+
+		}}.start();
+		return false;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //@Override
 //public boolean onCreateOptionsMenu(Menu menu) {
 //	// Inflate the menu; this adds items to the action bar if it is present.

@@ -54,8 +54,8 @@
     	android:layout_marginTop="30dp"
     	android:layout_gravity="center_horizontal"/>
       <ImageView 
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
+        android:layout_width="150dp"
+    	android:layout_height="150dp"
     	android:src="@drawable/ofuro_no_bg" 
     	android:layout_gravity="left"/>
 

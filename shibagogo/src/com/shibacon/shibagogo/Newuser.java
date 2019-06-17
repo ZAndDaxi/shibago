@@ -1,8 +1,22 @@
 package com.shibacon.shibagogo;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StreamTokenizer;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.shibacon.shibachan.User;
+import com.shibacon.utils.BitmapUtils;
+import com.shibacon.utils.HttpUrlConnectionUtils;
+import com.shibacon.utils.PathParseUtils;
+import com.shibacon.utils.StreamUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,14 +33,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 public class Newuser extends Activity {
 	private EditText et_mailaddress=null;
 	private EditText et_password=null;
+	private String mailaddr;
+	private String password;
 	private Button btn_next1=null;//to image uplode新规登陆至上传照片
 	private ImageView image_upload=null;
 	private Button btn_imageupload=null;//upload上传照片
-	private Button btn_next2=null;
+	private Button btn_next2=null;//上传照片至初始化
 	private Bitmap bitmap;
 	private static Uri picuri;
 	private static final int CHOOSE_PICTURE=0;
@@ -35,13 +52,25 @@ public class Newuser extends Activity {
 	
 	private int []initial= {1,1,1,1};
 	
+	private RadioGroup rg1=null;
+	private RadioGroup rg2=null;
+	private RadioGroup rg3=null;
+	private RadioGroup rg4=null;
+	
+	private Button submit=null;//上传
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);	
+		setContentView(R.layout.activity_newuser);
+		//[1]get mailaddr & pwd
 		et_mailaddress=(EditText)findViewById(R.id.mailaddress1);
 		et_password=(EditText)findViewById(R.id.password1);
-		setContentView(R.layout.activity_newuser);
+		
+		mailaddr=et_mailaddress.getText().toString().trim();
+		password=et_password.getText().toString().trim();
+	    //[2]transit to imageupload;
 		btn_next1=(Button)findViewById(R.id.nexttoimage);
 		btn_next1.setOnClickListener(new OnClickListener() {
 			
@@ -49,9 +78,9 @@ public class Newuser extends Activity {
 			public void onClick(View v) {
 		
 				setContentView(R.layout.image_initialize);
+				//[3]upload an image
 				image_upload=(ImageView)findViewById(R.id.uploadimage);
 				btn_imageupload=(Button)findViewById(R.id.imageupload);
-				btn_next2=(Button)findViewById(R.id.next2);
 				btn_imageupload.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -60,12 +89,44 @@ public class Newuser extends Activity {
 						
 					}
 				});//加载图片
+				
+				//[4]transit to use initialization
+				btn_next2=(Button)findViewById(R.id.next2);
 				btn_next2.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
+						// 用户喜好获取
 						setContentView(R.layout.user_initialization);
+						rg1=(RadioGroup)findViewById(R.id.radioGroup1);
+						rg2=(RadioGroup)findViewById(R.id.radioGroup2);
+						rg3=(RadioGroup)findViewById(R.id.radioGroup3);
+						rg4=(RadioGroup)findViewById(R.id.radioGroup4);
+						if(rg1.getCheckedRadioButtonId()==R.id.btnNo) {
+							initial[0]=0;
+						}
+						if(rg2.getCheckedRadioButtonId()==R.id.btnNo2) {
+							initial[1]=0;
+						}
+						if(rg3.getCheckedRadioButtonId()==R.id.btnNo3) {
+							initial[2]=0;
+						}
+						if(rg4.getCheckedRadioButtonId()==R.id.btnNo4) {
+							initial[3]=0;
+						}
+						
+						//[5]upload to server
+						submit=(Button)findViewById(R.id.button_submit);
+						submit.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								//uploadAll(bitmap, mailaddr, password, initial);
+								Intent i=new Intent(Newuser.this,MainActivity.class);
+								startActivity(i);
+								return;
+							}
+						});
 					}
 				});//下一个
 				
@@ -104,7 +165,6 @@ public class Newuser extends Activity {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode==RESULT_OK) {
 			switch (requestCode) {
@@ -112,6 +172,7 @@ public class Newuser extends Activity {
 				startPhotoZoom(picuri);
 				break;
 			case CHOOSE_PICTURE:
+
 				startPhotoZoom(data.getData());
 				break;
 			case CROP_SMALL_PICTURE:
@@ -126,10 +187,11 @@ public class Newuser extends Activity {
 	protected void startPhotoZoom(Uri uri) {
 		if(uri==null) {
 			Log.i("tag", "This uri is not exist");
+			return;
 		}
-		picuri=uri;
+		picuri=PathParseUtils.getUri(this, uri);
 		Intent intent=new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(uri, "image/*");
+		intent.setDataAndType(picuri, "image/*");
 		intent.putExtra("crop", "true");
 
 		intent.putExtra("aspectX", 1);
@@ -147,11 +209,15 @@ public class Newuser extends Activity {
 			image_upload.setImageBitmap(bitmap);	
 		}
 	}
+	
+	
 	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
-		new Thread() {public void run() {
-			JSONObject userJSON=new JSONObject();
-
-		};}.start();
+		final User user=new User(mailaddress,pwd);
+		
+		user.setIni(ini[0], ini[1], ini[2], ini[3]);
+		user.setImage(BitmapUtils.convertIconToString(bitmap));
+		HttpUrlConnectionUtils.RegisterRequest(user);
+	
 	}
 }
 //@Override
