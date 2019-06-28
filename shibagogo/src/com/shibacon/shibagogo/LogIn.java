@@ -10,6 +10,8 @@ import com.shibacon.utils.StreamUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -25,11 +27,21 @@ import android.widget.Toast;
 public class LogIn extends Activity {
 	private EditText ed_addr = null;
 	private EditText ed_pwd =null;
-	private Handler handler=new Handler() {};
+	private String messtoken="";
+
+	private Handler handler=new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			messtoken=(String)msg.obj;
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(checkLogin()) {
+			Intent intent=new Intent(LogIn.this,MainActivity.class);
+			startActivity(intent);
+		}
 		setContentView(R.layout.activity_log_in);
 		
 		
@@ -65,12 +77,18 @@ public class LogIn extends Activity {
 					Toast.makeText(LogIn.this, "パスワードを入力ください", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				if(!mailaddr.contains("@")) {
-					Toast.makeText(LogIn.this, "有効なメールアドレスを入力ください", Toast.LENGTH_SHORT).show();
-					return;
-				}
+				LoginRequest(mailaddr, pwd);
+//				if(mailaddr.equals("a")&&pwd.equals("b")) {
+//					messtoken="test";
+//				}
 
-				if(canfind(mailaddr, pwd)) {
+				if(canfind(messtoken)) {
+					Shibaapp.token=messtoken;
+					SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+					Editor editor=sp.edit();
+					editor.putInt("login", 1);
+					editor.putString("token", Shibaapp.token);
+					editor.commit();
 					Intent i=new Intent(LogIn.this,MainActivity.class);
 					startActivity(i);
 					return;
@@ -80,19 +98,19 @@ public class LogIn extends Activity {
 					return;
 				}
 			}
-			
-			
 
-			private boolean canfind(String mailaddr, String pwd) {
-				if(mailaddr.equals("xing@a")&&pwd.equals("test")) {
-					return true;
-				}else {
-					return false;
-				}
-			}
 		});	
 	}
-	private boolean LoginRequest(final String maila,final String pwd) {
+	private boolean canfind(String mess) {
+		if(mess=="") {
+			return false;
+		}else if(mess.equals("false")) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	private void LoginRequest(final String maila,final String pwd) {
 		new Thread() {public void run() {
 			HttpURLConnection conn=null;
 			try {
@@ -135,7 +153,17 @@ public class LogIn extends Activity {
 				}//String
 
 		}}.start();
+		return;
+	}
+	public boolean checkLogin() {
+		SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+		int i=sp.getInt("login", 0);
+		if(i==1) {
+			Shibaapp.token=sp.getString("token", Shibaapp.token);
+			return true;
+		}
 		return false;
+
 	}
 
 }

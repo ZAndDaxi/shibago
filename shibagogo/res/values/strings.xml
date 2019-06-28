@@ -11,5 +11,7 @@
     <string name="title_activity_log_in">LogIn</string>
     <string name="title_activity_newuser">Newuser</string>
     <string name="title_activity_qrcode">QRCode</string>
+    <string name="title_activity_addfriend">Addfriend</string>
+    <string name="title_activity_setting">Setting</string>
 
 </resources>

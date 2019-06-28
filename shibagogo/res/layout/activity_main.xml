@@ -1,22 +1,94 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shibacon.shibagogo.MainActivity" >
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.shibacon.shibagogo.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-    <Button
-        android:id="@+id/test" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-        />
 
-</RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp" >
+	 
+        <ProgressBar 
+		    android:id="@+id/level_bar"
+		    style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="150dp"
+			android:layout_height="30dp"
+			android:max="100"
+			android:progress="50"/>
+        
+        <TextView 
+            android:id="@+id/level_word"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="Level" 
+	    	android:textColor="#473D39"
+	    	android:layout_below="@id/level_bar"
+	    	android:textSize="25sp"   />
+        
+	    <TextView 
+	        android:id="@+id/level_score"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	        android:text="50"  
+	    	android:textColor="#473D39"
+	    	android:layout_toRightOf="@id/level_word"
+	    	android:layout_below="@id/level_bar"
+	    	android:layout_marginLeft="10dp"
+	    	android:textSize="25sp"   />
+	            
+	    <ImageButton
+		    android:id="@+id/setting"
+		    android:layout_width="37dp"
+		    android:layout_height="42dp"
+		    android:src="@drawable/setting"
+		    android:layout_toRightOf="@id/level_bar"
+		    android:layout_marginLeft="140dp" 
+		    android:onClick="goToSetting"/>
+	       
+	</RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_height="450dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true" >
+
+        <ImageView
+            android:id="@+id/main_character_imageView"
+            android:layout_width="189dp"
+            android:layout_height="205dp"
+            android:src="@drawable/shiba_sofa"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="53dp"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/goto_friend_list_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fiends_list"
+            android:layout_above="@id/main_character_imageView"
+            android:layout_marginLeft="240dp"
+            android:layout_marginBottom="18dp"
+            android:onClick="goToFriendList"/>
+
+        <ImageButton
+            android:id="@+id/goto_mission_list_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/task"
+            android:layout_above="@id/main_character_imageView"
+            android:layout_marginBottom="30dp"
+            android:onClick="goToMissionList" />
+        
+	</RelativeLayout>
+
+</LinearLayout>

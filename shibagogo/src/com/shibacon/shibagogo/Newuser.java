@@ -1,6 +1,5 @@
 package com.shibacon.shibagogo;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +13,7 @@ import org.json.JSONObject;
 
 import com.shibacon.shibachan.User;
 import com.shibacon.utils.BitmapUtils;
-import com.shibacon.utils.HttpUrlConnectionUtils;
+
 import com.shibacon.utils.PathParseUtils;
 import com.shibacon.utils.StreamUtils;
 
@@ -22,10 +21,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +52,7 @@ public class Newuser extends Activity {
 	private static final int CHOOSE_PICTURE=0;
 	private static final int TAKE_PICTURE=1;
 	private static final int CROP_SMALL_PICTURE=2;
-	
+	private String messtoken="";
 	private int []initial= {1,1,1,1};
 	
 	private RadioGroup rg1=null;
@@ -58,6 +61,11 @@ public class Newuser extends Activity {
 	private RadioGroup rg4=null;
 	
 	private Button submit=null;//上传
+	private Handler handler=new Handler() {
+		public void handleMessage(Message msg) {
+			messtoken=(String) msg.obj;
+		};
+	};
 	
 	
 	@Override
@@ -121,7 +129,7 @@ public class Newuser extends Activity {
 							
 							@Override
 							public void onClick(View v) {
-								//uploadAll(bitmap, mailaddr, password, initial);
+						//		uploadAll(bitmap, mailaddr, password, initial);
 								Intent i=new Intent(Newuser.this,MainActivity.class);
 								startActivity(i);
 								return;
@@ -211,13 +219,67 @@ public class Newuser extends Activity {
 	}
 	
 	
-	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
-		final User user=new User(mailaddress,pwd);
-		
-		user.setIni(ini[0], ini[1], ini[2], ini[3]);
-		user.setImage(BitmapUtils.convertIconToString(bitmap));
-		HttpUrlConnectionUtils.RegisterRequest(user);
-	
+//	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
+//		final User user=new User(mailaddress,pwd);
+//		
+//		user.setIni(ini[0], ini[1], ini[2], ini[3]);
+//		user.setImage(BitmapUtils.convertIconToString(bitmap));
+//		RegisterRequest(user);
+//		if(!messtoken.equals("fail")) {
+//			Shibaapp.token=messtoken;
+//			SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+//			Editor editor=sp.edit();
+//			editor.putInt("login", 1);
+//			editor.putString("token", Shibaapp.token);
+//			editor.commit();
+//		}
+//	
+//	}
+	public void RegisterRequest(final User user) {
+		new Thread() {public void run() {
+			try {
+				JSONObject userJSON=new JSONObject();
+				userJSON.put("userMailAddress", user.getMailAddr());//String
+				userJSON.put("userPassword", user.getPassword());//String
+				userJSON.put("userInitialInfo", user.getIni());//int[]
+				userJSON.put("userImage", user.getImage());//Bitmap
+				
+				String content=String.valueOf(userJSON);
+				
+				URL url=new URL("");
+				
+				HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.setDoOutput(true);
+				conn.setRequestProperty("User-Agent", "Fiddler");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setRequestProperty("Charset", "UTF-8");
+				OutputStream os=conn.getOutputStream();
+				os.write(content.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					
+					String result=StreamUtils.readStream(is);
+				    android.os.Message msg=android.os.Message.obtain();
+				    msg.obj=result;
+				    handler.sendMessage(msg);
+					
+					
+				}
+				
+				conn.disconnect();
+				
+				
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		};}.start();
 	}
 }
 //@Override
