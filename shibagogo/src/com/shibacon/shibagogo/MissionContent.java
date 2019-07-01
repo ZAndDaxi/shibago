@@ -1,34 +1,71 @@
 package com.shibacon.shibagogo;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MissionContent extends Activity {
 
+	private double lat;
+	private double lng;
+	private WebView webview;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission_content);
-	}
+		Location lo=getLocation();
+		if(lo!=null) {
+			lat=lo.getLatitude();
+			lng=lo.getLongitude();
+	        webview = (WebView) findViewById(R.id.webView);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mission_content, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	        webview.setWebViewClient(new WebViewClient());
+	        webview.getSettings().setJavaScriptEnabled(true);
+	        webview.loadUrl("http://maps.google.com/maps?" + "saddr="+lat+","+lng+"" + "&daddr=34.9835453,135.9603931");
 		}
-		return super.onOptionsItemSelected(item);
 	}
+
+	public Location getLocation() {
+
+		System.out.println("来找位置了");
+		String serciveString=Context.LOCATION_SERVICE;
+		LocationManager lm=(LocationManager)getSystemService(serciveString);
+		List<String> providerlist=lm.getProviders(true);
+		
+		String provider;
+		Location location;
+		
+		if(providerlist.contains(LocationManager.NETWORK_PROVIDER)) {
+			provider=LocationManager.NETWORK_PROVIDER;
+	//		System.out.println("网络接收");
+		}else if(providerlist.contains(LocationManager.GPS_PROVIDER)) {
+			provider=LocationManager.GPS_PROVIDER;
+	//		System.out.println("鸡皮阿斯接收");
+		}else {
+			provider=null;
+		}
+		
+		if(provider!=null) {
+			try {
+				location=lm.getLastKnownLocation(provider);			
+				return location;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}else {
+		//	System.out.println("不存在提供");
+		}
+		return null;
+		
+	}
+
 }

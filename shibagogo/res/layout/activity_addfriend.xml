@@ -6,11 +6,38 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shibacon.shibagogo.Addfriend" >
+    tools:context="com.shibacon.shibagogo.Addfriend" 
+    android:gravity="center_horizontal" >
 
-    <TextView
+    <LinearLayout 
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    	android:layout_height="wrap_content"
+    	android:gravity="center"
+    	>
+    <EditText 
+        android:id="@+id/search_friend_id"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"  
+    	android:ems="10"
+    	android:hint="Input user ID"    
+    	android:layout_gravity="center"
+    	android:layout_marginTop="20dp" 
+    	android:layout_marginBottom="30dp"
+    	android:password="true"
+    	android:inputType="textNoSuggestions"
+        />
+    <Button
+        android:id="@+id/add_friend"
+        android:layout_width="wrap_content"
+    	android:layout_height="30dp"  
+    	android:text="Add friend" 
+    	android:textSize="15sp"  
+    	android:background="#9d847b"  
+    	android:textColor="#ffffff"  
+    	 
+        />
+
+    </LinearLayout>
 
 </RelativeLayout>

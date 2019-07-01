@@ -16,22 +16,11 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp" >
 	 
-        <ProgressBar 
-		    android:id="@+id/level_bar"
-		    style="?android:attr/progressBarStyleHorizontal"
-			android:layout_width="150dp"
-			android:layout_height="30dp"
-			android:max="100"
-			android:progress="50"/>
-        
-        <TextView 
-            android:id="@+id/level_word"
-	        android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:text="Level" 
-	    	android:textColor="#473D39"
-	    	android:layout_below="@id/level_bar"
-	    	android:textSize="25sp"   />
+        <ImageView
+		    android:id="@+id/crown_image"
+   		 	android:layout_height="54dp"
+   		 	android:layout_width="66dp"
+            android:src="@drawable/crown_copper"/>
         
 	    <TextView 
 	        android:id="@+id/level_score"
@@ -39,9 +28,8 @@
 	    	android:layout_height="wrap_content"
 	        android:text="50"  
 	    	android:textColor="#473D39"
-	    	android:layout_toRightOf="@id/level_word"
-	    	android:layout_below="@id/level_bar"
-	    	android:layout_marginLeft="10dp"
+	    	android:layout_marginLeft="16dp"
+	    	android:layout_marginTop="17dp"
 	    	android:textSize="25sp"   />
 	            
 	    <ImageButton
@@ -49,8 +37,8 @@
 		    android:layout_width="37dp"
 		    android:layout_height="42dp"
 		    android:src="@drawable/setting"
-		    android:layout_toRightOf="@id/level_bar"
-		    android:layout_marginLeft="140dp" 
+		    android:layout_toRightOf="@id/crown_image"
+		    android:layout_marginLeft="240dp" 
 		    android:onClick="goToSetting"/>
 	       
 	</RelativeLayout>
@@ -65,7 +53,7 @@
             android:id="@+id/main_character_imageView"
             android:layout_width="189dp"
             android:layout_height="205dp"
-            android:src="@drawable/shiba_sofa"
+            android:src="@drawable/shiba_angry"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="53dp"
             android:layout_centerHorizontal="true"/>

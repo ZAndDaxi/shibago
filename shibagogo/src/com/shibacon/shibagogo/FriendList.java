@@ -16,28 +16,33 @@ import com.shibacon.utils.StreamUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class FriendList extends Activity {
-//	private TreeMap<Integer, flist> fset;
-//	private Handler handler=new Handler() {
-//		public void handleMessage(Message msg) {
-//			if(msg.what==1) {
-//			fset=JSONParseUtils.getfriendlist((String)msg.obj);}
-//		};
-//	};
+	private TreeMap<Integer, flist> fset;
+	private Handler handler=new Handler() {
+		public void handleMessage(Message msg) {
+			if(msg.what==1) {
+			fset=JSONParseUtils.getfriendlist((String)msg.obj);}
+		};
+	};//接收朋友列表
 
-	private String[] usernames = new String[]{"user1", "user2", "user3"};
-    private String[] level = new String[]{"23", "18", "9"};
-    private int[] imageIds = new int[]{R.drawable.fiends_list, R.drawable.fiends_list, R.drawable.fiends_list};
-
+	private Bitmap ima;
+	private Handler handlerforimage=new Handler() {
+		public void handleMessage(Message msg) {
+			ima=(Bitmap) msg.obj;
+		};
+	};//一一接收图片
     private ListView friend_list_ListView;
     private SimpleAdapter friend_list_SimpleAdapter;
     private List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
@@ -47,11 +52,12 @@ public class FriendList extends Activity {
 		setContentView(R.layout.activity_friend_list);
         friend_list_ListView = (ListView)findViewById(R.id.friend_list_ListView);
 		
-        for (int i = 0; i < usernames.length; i++) {
+        for (int i = 0; i < fset.size(); i++) {
+        	getImageView(fset.get(i+1).getImagepath());
             Map<String, Object> showitem = new HashMap<String, Object>();
-            showitem.put("image", imageIds[i]);
-            showitem.put("username", usernames[i]);
-            showitem.put("level", level[i]);
+            showitem.put("image", ima);
+            showitem.put("username", fset.get(i+1).getName());
+            showitem.put("level", fset.get(i+1).getLevel());
             listitem.add(showitem);
         }
 
@@ -61,42 +67,64 @@ public class FriendList extends Activity {
 
         friend_list_ListView.setAdapter(friend_list_SimpleAdapter);
 	}
-//	public void friendlistfromserver() {
-//		new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				HttpURLConnection conn=null;
-//				try {
-//					URL url=new URL("");
-//					String mytoken=Shibaapp.token;
-//					conn=(HttpURLConnection) url.openConnection();
-//					conn.setReadTimeout(5000);
-//					conn.setRequestMethod("POST");
-//					conn.addRequestProperty("Charset", "UTF-8");
-//					conn.setDoOutput(true);
-//					OutputStream os=conn.getOutputStream();
-//					os.write(mytoken.getBytes());
-//					os.close();
-//					int code=conn.getResponseCode();
-//					if(code==200) {
-//						InputStream is=conn.getInputStream();
-//						String result=StreamUtils.readStream(is);
-//						Message msg=Message.obtain();
-//						msg.what=1;
-//						msg.obj=result;
-//						handler.sendMessage(msg);
-//					}
-//					
-//				} catch (Exception e) {
-//			
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//		}) {};
-//	}
+	public void friendlistfromserver() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				HttpURLConnection conn=null;
+				try {
+					URL url=new URL("");
+					String mytoken=Shibaapp.token;
+					conn=(HttpURLConnection) url.openConnection();
+					conn.setReadTimeout(5000);
+					conn.setRequestMethod("POST");
+					conn.addRequestProperty("Charset", "UTF-8");
+					conn.setDoOutput(true);
+					OutputStream os=conn.getOutputStream();
+					os.write(mytoken.getBytes());
+					os.close();
+					int code=conn.getResponseCode();
+					if(code==200) {
+						InputStream is=conn.getInputStream();
+						String result=StreamUtils.readStream(is);
+						Message msg=Message.obtain();
+						msg.what=1;
+						msg.obj=result;
+						handler.sendMessage(msg);
+					}
+					
+				} catch (Exception e) {
+			
+					e.printStackTrace();
+				}
+				
+			}
+		}) {};
+	}
 
+	public void getImageView(final String imagePath) {
+		new Thread() {public void run() {
+			try {
+				URL url=new URL(imagePath);//QRCode
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setConnectTimeout(5000);
+				int code = conn.getResponseCode();
+				if(code == 200) {
+					InputStream in = conn.getInputStream();
+					Bitmap bitmap=BitmapFactory.decodeStream(in);
+					Message msg=Message.obtain();
+					msg.obj=bitmap;
+					handler.sendMessage(msg);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		};}.start();
+	}
+	
 	//jump to addfriend
 	public void addfriend(View view) {
 		startActivity(new Intent(FriendList.this,Addfriend.class));

@@ -35,16 +35,10 @@ public class ShibaService extends Service {
 //		};}.start();
 
 	}
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-//		updateloc();
-//		uptoserver();
 
-		return super.onStartCommand(intent, flags, startId);
-	}
 //	public void uptoserver() {
 //		while(true) {
-//			SystemClock.sleep(60000);
+//			SystemClock.sleep(60000);//这里是1分钟
 //			System.out.println(alll);
 //			alll.clear();
 //		}
@@ -90,11 +84,9 @@ public class ShibaService extends Service {
 	//		System.out.println("鸡皮阿斯接收");
 		}else {
 			provider=null;
-//			System.out.println("接收器你咋饿了");
 		}
 		
 		if(provider!=null) {
-	//		System.out.println("进老了撒");
 			try {
 				location=lm.getLastKnownLocation(provider);			
 				return location;

@@ -18,11 +18,11 @@ public class JSONParseUtils {
 			for(int i=0;i<jsonarray.length();i++) {
 				JSONObject jo=jsonarray.getJSONObject(i);
 				flist f=new flist();
-				int key=jo.getInt("id");
+				f.setRanking(jo.getInt("ranking"));
 				f.setName(jo.getString("name"));
 				f.setLevel(jo.getInt("level"));
 				f.setImagepath(jo.getString("imagepath"));
-				tm.put(key, f);
+				tm.put(f.getRanking(), f);
 			}
 			
 			
@@ -42,7 +42,10 @@ public class JSONParseUtils {
 				Mission m=new Mission();
 				m.setMission(jo.getString("mission"));
 				m.setDate(jo.getString("date"));
-				m.setState(jo.getInt("state"));
+				m.setState(jo.getString("state"));
+				m.setContent(jo.getString("content"));
+				m.setLat(jo.getDouble("latitude"));
+				m.setLng(jo.getDouble("longtitude"));
 				al.add(m);
 			}
 		} catch (JSONException e) {

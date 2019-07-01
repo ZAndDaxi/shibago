@@ -41,65 +41,62 @@ public class LogIn extends Activity {
 		if(checkLogin()) {
 			Intent intent=new Intent(LogIn.this,MainActivity.class);
 			startActivity(intent);
-		}
-		setContentView(R.layout.activity_log_in);
+			return;
+		}else {
+			setContentView(R.layout.activity_log_in);
 		
 		
-		ed_addr=(EditText) findViewById(R.id.mailaddress);
-		ed_pwd=(EditText)findViewById(R.id.password);
-		Button btn_login=(Button)findViewById(R.id.login);
-		TextView tv_new=(TextView)findViewById(R.id.noaccount);
+			ed_addr=(EditText) findViewById(R.id.mailaddress);
+			ed_pwd=(EditText)findViewById(R.id.password);
+			Button btn_login=(Button)findViewById(R.id.login);
+			TextView tv_new=(TextView)findViewById(R.id.noaccount);
 		
-		tv_new.setOnClickListener(new OnClickListener() {
+			tv_new.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i=new Intent(LogIn.this,Newuser.class);
-				startActivity(i);
-				return;
+				public void onClick(View v) {
 				
-			}
-		});
-		
-		btn_login.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String mailaddr=ed_addr.getText().toString().trim();
-				String pwd=ed_pwd.getText().toString().trim();
-				if(TextUtils.isEmpty(mailaddr)) {
-					Toast.makeText(LogIn.this, "メールアドレスを入力ください", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if(TextUtils.isEmpty(pwd)) {
-					Toast.makeText(LogIn.this, "パスワードを入力ください", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				LoginRequest(mailaddr, pwd);
-//				if(mailaddr.equals("a")&&pwd.equals("b")) {
-//					messtoken="test";
-//				}
-
-				if(canfind(messtoken)) {
-					Shibaapp.token=messtoken;
-					SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
-					Editor editor=sp.edit();
-					editor.putInt("login", 1);
-					editor.putString("token", Shibaapp.token);
-					editor.commit();
-					Intent i=new Intent(LogIn.this,MainActivity.class);
+					Intent i=new Intent(LogIn.this,Newuser.class);
 					startActivity(i);
-					return;
-					
-				}else {
-					Toast.makeText(LogIn.this, "入力間違いました", Toast.LENGTH_SHORT).show();
-					return;
+					return;	
 				}
-			}
+			});
+		
+			btn_login.setOnClickListener(new OnClickListener() {	
+			@Override
+				public void onClick(View v) {
+	
+					String mailaddr=ed_addr.getText().toString().trim();
+					String pwd=ed_pwd.getText().toString().trim();
+					if(TextUtils.isEmpty(mailaddr)) {
+						Toast.makeText(LogIn.this, "メールアドレスを入力ください", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					if(TextUtils.isEmpty(pwd)) {
+						Toast.makeText(LogIn.this, "パスワードを入力ください", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					LoginRequest(mailaddr, pwd);
 
-		});	
+					if(canfind(messtoken)) {
+						Shibaapp.token=messtoken;
+						SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+						Editor editor=sp.edit();
+						editor.putInt("login", 1);
+						editor.putString("token", Shibaapp.token);
+						editor.commit();
+						Intent i=new Intent(LogIn.this,MainActivity.class);
+						startActivity(i);
+						return;
+					
+						}else {
+							Toast.makeText(LogIn.this, "入力間違いました", Toast.LENGTH_SHORT).show();
+							return;
+						}
+					}
+	
+
+			});	}
 	}
 	private boolean canfind(String mess) {
 		if(mess=="") {
@@ -167,39 +164,3 @@ public class LogIn extends Activity {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//@Override
-//public boolean onCreateOptionsMenu(Menu menu) {
-//	// Inflate the menu; this adds items to the action bar if it is present.
-//	getMenuInflater().inflate(R.menu.log_in, menu);
-//	return true;
-//}
-//
-//@Override
-//public boolean onOptionsItemSelected(MenuItem item) {
-//	// Handle action bar item clicks here. The action bar will
-//	// automatically handle clicks on the Home/Up button, so long
-//	// as you specify a parent activity in AndroidManifest.xml.
-//	int id = item.getItemId();
-//	if (id == R.id.action_settings) {
-//		return true;
-//	}
-//	return super.onOptionsItemSelected(item);
-//}

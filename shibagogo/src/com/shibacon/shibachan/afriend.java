@@ -12,7 +12,7 @@ public class afriend {
 		this.friendname = friendname;
 	}
 	public String getMytoken() {
-		return mytoken;
+		return Shibaapp.token;
 	}
 	public void setMytoken() {
 	//	this.mytoken = Shibaapp.token;

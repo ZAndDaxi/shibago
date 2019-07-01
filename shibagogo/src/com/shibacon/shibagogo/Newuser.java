@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Newuser extends Activity {
 	private EditText et_mailaddress=null;
@@ -129,7 +130,8 @@ public class Newuser extends Activity {
 							
 							@Override
 							public void onClick(View v) {
-						//		uploadAll(bitmap, mailaddr, password, initial);
+						
+								uploadAll(bitmap, mailaddr, password, initial);
 								Intent i=new Intent(Newuser.this,MainActivity.class);
 								startActivity(i);
 								return;
@@ -219,22 +221,24 @@ public class Newuser extends Activity {
 	}
 	
 	
-//	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
-//		final User user=new User(mailaddress,pwd);
-//		
-//		user.setIni(ini[0], ini[1], ini[2], ini[3]);
-//		user.setImage(BitmapUtils.convertIconToString(bitmap));
-//		RegisterRequest(user);
-//		if(!messtoken.equals("fail")) {
-//			Shibaapp.token=messtoken;
-//			SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
-//			Editor editor=sp.edit();
-//			editor.putInt("login", 1);
-//			editor.putString("token", Shibaapp.token);
-//			editor.commit();
-//		}
-//	
-//	}
+	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
+		final User user=new User(mailaddress,pwd);
+		
+		user.setIni(ini[0], ini[1], ini[2], ini[3]);
+		user.setImage(BitmapUtils.convertIconToString(bitmap));
+		RegisterRequest(user);
+		if(!messtoken.equals("fail")) {
+			Shibaapp.token=messtoken;
+			SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+			Editor editor=sp.edit();
+			editor.putInt("login", 1);
+			editor.putString("token", Shibaapp.token);
+			editor.commit();
+		}else {
+			Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+		}
+	
+	}
 	public void RegisterRequest(final User user) {
 		new Thread() {public void run() {
 			try {
@@ -282,21 +286,4 @@ public class Newuser extends Activity {
 		};}.start();
 	}
 }
-//@Override
-//public boolean onCreateOptionsMenu(Menu menu) {
-//	// Inflate the menu; this adds items to the action bar if it is present.
-//	getMenuInflater().inflate(R.menu.newuser, menu);
-//	return true;
-//}
-//
-//@Override
-//public boolean onOptionsItemSelected(MenuItem item) {
-//	// Handle action bar item clicks here. The action bar will
-//	// automatically handle clicks on the Home/Up button, so long
-//	// as you specify a parent activity in AndroidManifest.xml.
-//	int id = item.getItemId();
-//	if (id == R.id.action_settings) {
-//		return true;
-//	}
-//	return super.onOptionsItemSelected(item);
-//}
+

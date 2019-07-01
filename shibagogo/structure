@@ -1,0 +1,202 @@
+.
+├── AndroidManifest.xml
+├── assets
+├── bin
+│   ├── AndroidManifest.xml
+│   ├── classes
+│   │   └── com
+│   │       └── shibacon
+│   │           ├── shibachan
+│   │           │   ├── Mcontent.class
+│   │           │   ├── Mission.class
+│   │           │   ├── Shiba.class
+│   │           │   ├── User.class
+│   │           │   ├── afriend.class
+│   │           │   ├── flist.class
+│   │           │   └── locationlog.class
+│   │           ├── shibagogo
+│   │           │   ├── Addfriend$1.class
+│   │           │   ├── Addfriend$2.class
+│   │           │   ├── Addfriend$3.class
+│   │           │   ├── Addfriend.class
+│   │           │   ├── BuildConfig.class
+│   │           │   ├── FriendList$1.class
+│   │           │   ├── FriendList$2.class
+│   │           │   ├── FriendList$3.class
+│   │           │   ├── FriendList$4.class
+│   │           │   ├── FriendList$5.class
+│   │           │   ├── FriendList.class
+│   │           │   ├── LogIn$1.class
+│   │           │   ├── LogIn$2.class
+│   │           │   ├── LogIn$3.class
+│   │           │   ├── LogIn$4.class
+│   │           │   ├── LogIn.class
+│   │           │   ├── MainActivity.class
+│   │           │   ├── MissionContent.class
+│   │           │   ├── MissionList$1.class
+│   │           │   ├── MissionList$2.class
+│   │           │   ├── MissionList.class
+│   │           │   ├── Newuser$1.class
+│   │           │   ├── Newuser$2$1.class
+│   │           │   ├── Newuser$2$2$1.class
+│   │           │   ├── Newuser$2$2.class
+│   │           │   ├── Newuser$2.class
+│   │           │   ├── Newuser$3.class
+│   │           │   ├── Newuser$4.class
+│   │           │   ├── Newuser.class
+│   │           │   ├── QRCode$1.class
+│   │           │   ├── QRCode$2.class
+│   │           │   ├── QRCode.class
+│   │           │   ├── R$attr.class
+│   │           │   ├── R$dimen.class
+│   │           │   ├── R$drawable.class
+│   │           │   ├── R$id.class
+│   │           │   ├── R$layout.class
+│   │           │   ├── R$menu.class
+│   │           │   ├── R$string.class
+│   │           │   ├── R$style.class
+│   │           │   ├── R.class
+│   │           │   ├── Setting$1.class
+│   │           │   ├── Setting$2.class
+│   │           │   ├── Setting$3.class
+│   │           │   ├── Setting$4.class
+│   │           │   ├── Setting$5.class
+│   │           │   ├── Setting$6.class
+│   │           │   ├── Setting$7.class
+│   │           │   ├── Setting$8.class
+│   │           │   ├── Setting$9.class
+│   │           │   ├── Setting.class
+│   │           │   ├── ShibaService$1.class
+│   │           │   ├── ShibaService.class
+│   │           │   └── Shibaapp.class
+│   │           └── utils
+│   │               ├── BitmapUtils.class
+│   │               ├── JSONParseUtils.class
+│   │               ├── PathParseUtils.class
+│   │               └── StreamUtils.class
+│   ├── classes.dex
+│   ├── dexedLibs
+│   ├── res
+│   │   └── crunch
+│   │       ├── drawable
+│   │       │   ├── background.png
+│   │       │   ├── camera.png
+│   │       │   ├── dogfeet.png
+│   │       │   ├── fiends_list.png
+│   │       │   ├── icon_def.png
+│   │       │   ├── ofuro_no_bg.png
+│   │       │   ├── setting.png
+│   │       │   ├── shiba_sofa.png
+│   │       │   └── task.png
+│   │       ├── drawable-hdpi
+│   │       │   └── ic_launcher.png
+│   │       ├── drawable-mdpi
+│   │       │   └── ic_launcher.png
+│   │       ├── drawable-xhdpi
+│   │       │   └── ic_launcher.png
+│   │       └── drawable-xxhdpi
+│   │           └── ic_launcher.png
+│   ├── resources.ap_
+│   └── shibagogo.apk
+├── gen
+│   └── com
+│       └── shibacon
+│           └── shibagogo
+│               ├── BuildConfig.java
+│               └── R.java
+├── ic_launcher-web.png
+├── proguard-project.txt
+├── project.properties
+├── res
+│   ├── drawable
+│   │   ├── add_friend.png
+│   │   ├── background.png
+│   │   ├── camera.png
+│   │   ├── crown_copper.png
+│   │   ├── crown_gold.png
+│   │   ├── crown_silver.png
+│   │   ├── dogfeet.png
+│   │   ├── fiends_list.png
+│   │   ├── icon_def.png
+│   │   ├── ofuro_no_bg.png
+│   │   ├── setting.png
+│   │   ├── shiba_angry.png
+│   │   ├── shiba_candy.png
+│   │   ├── shiba_sofa.png
+│   │   └── task.png
+│   ├── drawable-hdpi
+│   │   └── ic_launcher.png
+│   ├── drawable-ldpi
+│   ├── drawable-mdpi
+│   │   └── ic_launcher.png
+│   ├── drawable-xhdpi
+│   │   └── ic_launcher.png
+│   ├── drawable-xxhdpi
+│   │   └── ic_launcher.png
+│   ├── layout
+│   │   ├── activity_addfriend.xml
+│   │   ├── activity_friend_list.xml
+│   │   ├── activity_initialize_image.xml
+│   │   ├── activity_log_in.xml
+│   │   ├── activity_main.xml
+│   │   ├── activity_mission_content.xml
+│   │   ├── activity_mission_list.xml
+│   │   ├── activity_newuser.xml
+│   │   ├── activity_qrcode.xml
+│   │   ├── activity_setting.xml
+│   │   ├── image_initialize.xml
+│   │   ├── layout_friend_list.xml
+│   │   ├── layout_mission_list.xml
+│   │   └── user_initialization.xml
+│   ├── menu
+│   │   ├── addfriend.xml
+│   │   ├── friend_list.xml
+│   │   ├── initialize_image.xml
+│   │   ├── log_in.xml
+│   │   ├── main.xml
+│   │   ├── mission_content.xml
+│   │   ├── mission_list.xml
+│   │   ├── newuser.xml
+│   │   ├── qrcode.xml
+│   │   └── setting.xml
+│   ├── values
+│   │   ├── dimens.xml
+│   │   ├── strings.xml
+│   │   └── styles.xml
+│   ├── values-v11
+│   │   └── styles.xml
+│   ├── values-v14
+│   │   └── styles.xml
+│   └── values-w820dp
+│       └── dimens.xml
+├── src
+│   └── com
+│       └── shibacon
+│           ├── shibachan
+│           │   ├── Mcontent.java
+│           │   ├── Mission.java
+│           │   ├── Shiba.java
+│           │   ├── User.java
+│           │   ├── afriend.java
+│           │   ├── flist.java
+│           │   └── locationlog.java
+│           ├── shibagogo
+│           │   ├── Addfriend.java
+│           │   ├── FriendList.java
+│           │   ├── LogIn.java
+│           │   ├── MainActivity.java
+│           │   ├── MissionContent.java
+│           │   ├── MissionList.java
+│           │   ├── Newuser.java
+│           │   ├── QRCode.java
+│           │   ├── Setting.java
+│           │   ├── ShibaService.java
+│           │   └── Shibaapp.java
+│           └── utils
+│               ├── BitmapUtils.java
+│               ├── JSONParseUtils.java
+│               ├── PathParseUtils.java
+│               └── StreamUtils.java
+└── structure
+
+39 directories, 160 files
