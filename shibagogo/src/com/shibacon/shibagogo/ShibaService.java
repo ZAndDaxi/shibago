@@ -1,10 +1,19 @@
 package com.shibacon.shibagogo;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.shibacon.shibachan.locationlog;
+import com.shibacon.utils.StreamUtils;
 
 import android.app.Service;
 import android.content.Context;
@@ -36,22 +45,22 @@ public class ShibaService extends Service {
 
 	}
 
-//	public void uptoserver() {
-//		while(true) {
-//			SystemClock.sleep(60000);//这里是1分钟
-//			System.out.println(alll);
-//			alll.clear();
-//		}
-//		
-//		
-//	}
+	public void uptoserver() {
+		while(true) {
+			SystemClock.sleep(600000);//这里是10分钟
+			conuploadtoserver();
+		//	System.out.println(alll);
+			if(!alll.isEmpty()) {
+				alll.clear();}
+		}	
+	}
 	public void updateloc() {
 
 		new Thread() {public void run() {
 
 			while(true) {
 				
-				SystemClock.sleep(5000);
+				SystemClock.sleep(10000);
 				locationlog log=new locationlog();
 				Location lo=getLocation();
 				if(lo!=null) {
@@ -99,6 +108,51 @@ public class ShibaService extends Service {
 		}
 		return null;
 		
+	}
+	public void conuploadtoserver() {
+		new Thread() {
+			public void run() {
+				try {
+					JSONArray ja=new JSONArray();
+					JSONObject jsonobj=new JSONObject();
+					JSONObject joo=null;
+					int count=alll.size();
+					for(int i=0;i<count;i++) {
+						joo=new JSONObject();
+						joo.put("date", alll.get(i).getTime());
+						joo.put("lat", alll.get(i).getLat());
+						joo.put("lng", alll.get(i).getLng());
+						ja.put(joo);
+						joo=null;
+					}
+					String info=ja.toString();
+					jsonobj.put("timeLocationinfo", info);
+					String content=String.valueOf(jsonobj);
+					
+					URL url=new URL("");
+					
+					HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+					conn.setReadTimeout(5000);
+					conn.setRequestMethod("POST");
+					conn.setDoOutput(true);
+					conn.setRequestProperty("User-Agent", "Fiddler");
+					conn.setRequestProperty("Content-Type", "application/json");
+					conn.setRequestProperty("Charset", "UTF-8");
+					OutputStream os=conn.getOutputStream();
+					os.write(content.getBytes());
+					os.close();
+					int code=conn.getResponseCode();
+					if(code==200) {						
+					}
+					
+					conn.disconnect();	
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+			};
+		}.start();
 	}
 	
 	

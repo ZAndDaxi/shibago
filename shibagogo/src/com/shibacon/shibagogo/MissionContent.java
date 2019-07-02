@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -21,7 +22,13 @@ public class MissionContent extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission_content);
+		
+		
 		Location lo=getLocation();
+		
+		Intent intent=getIntent();
+		double dlat=intent.getDoubleExtra("LAT",0);
+		double dlng=intent.getDoubleExtra("LNG",0);
 		if(lo!=null) {
 			lat=lo.getLatitude();
 			lng=lo.getLongitude();
@@ -29,7 +36,7 @@ public class MissionContent extends Activity {
 
 	        webview.setWebViewClient(new WebViewClient());
 	        webview.getSettings().setJavaScriptEnabled(true);
-	        webview.loadUrl("http://maps.google.com/maps?" + "saddr="+lat+","+lng+"" + "&daddr=34.9835453,135.9603931");
+	        webview.loadUrl("http://maps.google.com/maps?" + "saddr="+lat+","+lng+"" + "&daddr="+dlat+","+dlng+"");
 		}
 	}
 

@@ -7,10 +7,12 @@ public class User {  //用户信息
 	private String password;
 	private String image;
 	private int []ini= {1,1,1,1};
-	public User(String mailaddr,String pass) {
+	public User(String mailaddr,String pass,String imge,int []init) {
 		// TODO Auto-generated constructor stub
 		mailAddr=mailaddr;
 		password=pass;
+		image=imge;
+		ini[0]=init[0];ini[1]=init[1];ini[2]=init[2];ini[3]=init[3];
 	}
 	public void setMailAddr(String mailAddr) {
 		this.mailAddr = mailAddr;

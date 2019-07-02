@@ -20,17 +20,17 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	private int plevel=20;
-//	private Handler handler=new Handler() {
-//		public void handleMessage(Message msg) {
-//		
-//			if(msg.what==1) {
-//				 String l=(String) msg.obj;
-//				 Integer i=new Integer(l);
-//				 plevel=i.intValue();
-//			}			
-//			
-//		};
-//	};
+	private Handler handler=new Handler() {
+		public void handleMessage(Message msg) {
+		
+			if(msg.what==1) {
+				 String l=(String) msg.obj;
+				 Integer i=new Integer(l);
+				 plevel=i.intValue();
+			}			
+			
+		};
+	};
 	
 
 	@Override
@@ -61,41 +61,41 @@ public class MainActivity extends Activity {
 	}
 	
 	
-//	public void getlevel() {
-//		new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				HttpURLConnection conn=null;
-//				try {
-//					URL url=new URL("");
-//					String mytoken=Shibaapp.token;
-//					conn=(HttpURLConnection) url.openConnection();
-//					conn.setReadTimeout(5000);
-//					conn.setRequestMethod("POST");
-//					conn.addRequestProperty("Charset", "UTF-8");
-//					conn.setDoOutput(true);
-//					OutputStream os=conn.getOutputStream();
-//					os.write(mytoken.getBytes());
-//					os.close();
-//					int code=conn.getResponseCode();
-//					if(code==200) {
-//						InputStream is=conn.getInputStream();
-//						String result=StreamUtils.readStream(is);
-//						Message msg=Message.obtain();
-//						msg.what=1;
-//						msg.obj=result;
-//						handler.sendMessage(msg);
-//					}
-//					
-//				} catch (Exception e) {
-//			
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//		}) {};
-//	}
+	public void getlevel() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				HttpURLConnection conn=null;
+				try {
+					URL url=new URL("");
+					String mytoken=Shibaapp.token;
+					conn=(HttpURLConnection) url.openConnection();
+					conn.setReadTimeout(5000);
+					conn.setRequestMethod("POST");
+					conn.addRequestProperty("Charset", "UTF-8");
+					conn.setDoOutput(true);
+					OutputStream os=conn.getOutputStream();
+					os.write(mytoken.getBytes());
+					os.close();
+					int code=conn.getResponseCode();
+					if(code==200) {
+						InputStream is=conn.getInputStream();
+						String result=StreamUtils.readStream(is);
+						Message msg=Message.obtain();
+						msg.what=1;
+						msg.obj=result;
+						handler.sendMessage(msg);
+					}
+					
+				} catch (Exception e) {
+			
+					e.printStackTrace();
+				}
+				
+			}
+		}) {};
+	}
 
 }
 

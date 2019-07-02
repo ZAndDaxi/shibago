@@ -14,11 +14,16 @@ import com.shibacon.utils.JSONParseUtils;
 import com.shibacon.utils.StreamUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -54,6 +59,19 @@ public class MissionList extends Activity {
         		new int[]{R.id.mission_name, R.id.mission_content, R.id.mission_state, R.id.mission_limit_time});
 
         mission_list_ListView.setAdapter(mission_list_SimpleAdapter);
+        mission_list_ListView.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				double lat=milist.get(position).getLat();
+				double lng=milist.get(position).getLng();
+				Intent intent=new Intent(MissionList.this,MissionContent.class);
+				intent.putExtra("LAT", lat);
+				intent.putExtra("LNG", lng);
+				startActivity(intent);
+			}
+		});
+      
 	}
 	public void getFromserver() {
 		new Thread(){public void run() {

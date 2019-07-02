@@ -222,11 +222,9 @@ public class Newuser extends Activity {
 	
 	
 	private void uploadAll(Bitmap bitmap,String mailaddress,String pwd,int []ini) {
-		final User user=new User(mailaddress,pwd);
-		
-		user.setIni(ini[0], ini[1], ini[2], ini[3]);
-		user.setImage(BitmapUtils.convertIconToString(bitmap));
-		RegisterRequest(user);
+		final User user=new User(mailaddress,pwd,BitmapUtils.convertIconToString(bitmap),ini);
+		//test(user);
+      RegisterRequest(user);
 		if(!messtoken.equals("fail")) {
 			Shibaapp.token=messtoken;
 			SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
@@ -239,6 +237,23 @@ public class Newuser extends Activity {
 		}
 	
 	}
+//	public void test(final User user) {
+//		JSONObject userJSON=new JSONObject();
+//		try {
+//			userJSON.put("userMailAddress", user.getMailAddr());
+//			userJSON.put("userPassword", user.getPassword());//String
+//			userJSON.put("userInitialInfo", user.getIni());//int[]
+//			userJSON.put("userImage", user.getImage());//Bitmap
+//			
+//			String content=String.valueOf(userJSON);
+//			
+//			System.out.println("哎哎啊"+content);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}//String
+//
+//	}
 	public void RegisterRequest(final User user) {
 		new Thread() {public void run() {
 			try {

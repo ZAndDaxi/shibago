@@ -38,7 +38,7 @@ public class LogIn extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(checkLogin()) {
+		if(!checkLogin()) {
 			Intent intent=new Intent(LogIn.this,MainActivity.class);
 			startActivity(intent);
 			return;
