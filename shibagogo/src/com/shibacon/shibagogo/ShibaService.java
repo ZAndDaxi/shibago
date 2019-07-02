@@ -36,12 +36,7 @@ public class ShibaService extends Service {
 		super.onCreate();
 	
 		updateloc();
-//		new Thread() {public void run() {
-//			while(true) {
-//				SystemClock.sleep(3000);
-//				System.out.println("邢小茜");
-//			}
-//		};}.start();
+		uptoserver();
 
 	}
 

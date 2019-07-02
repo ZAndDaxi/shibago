@@ -38,7 +38,8 @@ public class LogIn extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(!checkLogin()) {
+		//startService(new Intent(getApplicationContext(),ShibaService.class));
+		if(checkLogin()) {
 			Intent intent=new Intent(LogIn.this,MainActivity.class);
 			startActivity(intent);
 			return;
