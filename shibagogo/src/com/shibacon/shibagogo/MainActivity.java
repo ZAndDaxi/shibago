@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		getlevel();
 //		Intent intent=new Intent(this,ShibaService.class);
 //		startService(intent);
 		TextView tv_level=findViewById(R.id.level_score);
@@ -62,39 +63,34 @@ public class MainActivity extends Activity {
 	
 	
 	public void getlevel() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				HttpURLConnection conn=null;
-				try {
-					URL url=new URL("");
-					String mytoken=Shibaapp.token;
-					conn=(HttpURLConnection) url.openConnection();
-					conn.setReadTimeout(5000);
-					conn.setRequestMethod("POST");
-					conn.addRequestProperty("Charset", "UTF-8");
-					conn.setDoOutput(true);
-					OutputStream os=conn.getOutputStream();
-					os.write(mytoken.getBytes());
-					os.close();
-					int code=conn.getResponseCode();
-					if(code==200) {
-						InputStream is=conn.getInputStream();
-						String result=StreamUtils.readStream(is);
-						Message msg=Message.obtain();
-						msg.what=1;
-						msg.obj=result;
-						handler.sendMessage(msg);
-					}
-					
-				} catch (Exception e) {
-			
-					e.printStackTrace();
+		new Thread() {public void run() {
+			HttpURLConnection conn=null;
+			try {
+				URL url=new URL("");
+				String mytoken=Shibaapp.token;
+				conn=(HttpURLConnection) url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.addRequestProperty("Charset", "UTF-8");
+				conn.setDoOutput(true);
+				OutputStream os=conn.getOutputStream();
+				os.write(mytoken.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					String result=StreamUtils.readStream(is);
+					Message msg=Message.obtain();
+					msg.what=1;
+					msg.obj=result;
+					handler.sendMessage(msg);
 				}
 				
+			} catch (Exception e) {
+		
+				e.printStackTrace();
 			}
-		}) {};
+		};}.start();
 	}
 
 }

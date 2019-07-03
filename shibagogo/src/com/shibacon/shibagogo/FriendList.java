@@ -51,7 +51,7 @@ public class FriendList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_list);
         friend_list_ListView = (ListView)findViewById(R.id.friend_list_ListView);
-		
+		friendlistfromserver();
         for (int i = 0; i < fset.size(); i++) {
         	getImageView(fset.get(i+1).getImagepath());
             Map<String, Object> showitem = new HashMap<String, Object>();
@@ -68,39 +68,35 @@ public class FriendList extends Activity {
         friend_list_ListView.setAdapter(friend_list_SimpleAdapter);
 	}
 	public void friendlistfromserver() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				HttpURLConnection conn=null;
-				try {
-					URL url=new URL("");
-					String mytoken=Shibaapp.token;
-					conn=(HttpURLConnection) url.openConnection();
-					conn.setReadTimeout(5000);
-					conn.setRequestMethod("POST");
-					conn.addRequestProperty("Charset", "UTF-8");
-					conn.setDoOutput(true);
-					OutputStream os=conn.getOutputStream();
-					os.write(mytoken.getBytes());
-					os.close();
-					int code=conn.getResponseCode();
-					if(code==200) {
-						InputStream is=conn.getInputStream();
-						String result=StreamUtils.readStream(is);
-						Message msg=Message.obtain();
-						msg.what=1;
-						msg.obj=result;
-						handler.sendMessage(msg);
-					}
-					
-				} catch (Exception e) {
-			
-					e.printStackTrace();
+		new Thread() {public void run() {
+			HttpURLConnection conn=null;
+			try {
+				URL url=new URL("");
+				String mytoken=Shibaapp.token;
+				conn=(HttpURLConnection) url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.addRequestProperty("Charset", "UTF-8");
+				conn.setDoOutput(true);
+				OutputStream os=conn.getOutputStream();
+				os.write(mytoken.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					String result=StreamUtils.readStream(is);
+					Message msg=Message.obtain();
+					msg.what=1;
+					msg.obj=result;
+					handler.sendMessage(msg);
 				}
 				
+			} catch (Exception e) {
+		
+				e.printStackTrace();
 			}
-		}) {};
+				
+		};}.start();
 	}
 
 	public void getImageView(final String imagePath) {

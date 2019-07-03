@@ -44,7 +44,7 @@ public class MissionList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission_list);
 		mission_list_ListView = (ListView)findViewById(R.id.mission_list_ListView);
-		
+		getFromserver();
         for (int i = 0; i < milist.size(); i++) {
             Map<String, Object> showitem = new HashMap<String, Object>();
             showitem.put("mission_names",milist.get(i).getMission());
