@@ -244,7 +244,10 @@ public class Newuser extends Activity {
 				JSONObject userJSON=new JSONObject();
 				userJSON.put("userMailAddress", user.getMailAddr());//String
 				userJSON.put("userPassword", user.getPassword());//String
-				userJSON.put("userInitialInfo", user.getIni());//int[]
+				userJSON.put("userInitialInfo1", user.getIni()[0]);//int[]
+				userJSON.put("userInitialInfo2", user.getIni()[1]);//int[]
+				userJSON.put("userInitialInfo3", user.getIni()[2]);//int[]
+				userJSON.put("userInitialInfo4", user.getIni()[3]);//int[]
 				userJSON.put("userImage", user.getImage());//Bitmap
 				
 				String content=String.valueOf(userJSON);
