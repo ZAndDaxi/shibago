@@ -37,45 +37,41 @@ public class Addfriend extends Activity {
 	}
 	
 	public void addfriend(final afriend af) {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				HttpURLConnection conn=null;
-				try {
-					URL url=new URL("");
+		new Thread() {public void run() {
+			HttpURLConnection conn=null;
+			try {
+				URL url=new URL("");
 
-					JSONObject job=new JSONObject();
-					
-					job.put("token", af.getMytoken());
-					job.put("friendname", af.getFriendname());
-					
-					String content=String.valueOf(job);
-					conn=(HttpURLConnection) url.openConnection();
-					conn.setReadTimeout(5000);
-					conn.setRequestMethod("POST");
-					conn.setDoOutput(true);
-					conn.setRequestProperty("User-Agent", "Fiddler");
-					conn.setRequestProperty("Charset", "UTF-8");
-					OutputStream os=conn.getOutputStream();
-					os.write(content.getBytes());
-					os.close();
-					int code=conn.getResponseCode();
-					if(code==200) {
-						InputStream is=conn.getInputStream();
-						String result=StreamUtils.readStream(is);
-						Message msg=Message.obtain();
-						msg.what=1;
-						msg.obj=result;
-						handler.sendMessage(msg);
-					}
-					
-				} catch (Exception e) {
-					
-					e.printStackTrace();
+				JSONObject job=new JSONObject();
+				
+				job.put("token", af.getMytoken());
+				job.put("friendname", af.getFriendname());
+				
+				String content=String.valueOf(job);
+				conn=(HttpURLConnection) url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.setDoOutput(true);
+				conn.setRequestProperty("User-Agent", "Fiddler");
+				conn.setRequestProperty("Charset", "UTF-8");
+				OutputStream os=conn.getOutputStream();
+				os.write(content.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					String result=StreamUtils.readStream(is);
+					Message msg=Message.obtain();
+					msg.what=1;
+					msg.obj=result;
+					handler.sendMessage(msg);
 				}
 				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
 			}
-		}) {};
+			
+		};}.start();
 	}
 }

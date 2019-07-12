@@ -16,7 +16,6 @@ public class afriend {
 	}
 	public void setMytoken() {
 	//	this.mytoken = Shibaapp.token;
-	}
-	
+	}	
 
 }

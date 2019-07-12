@@ -237,23 +237,7 @@ public class Newuser extends Activity {
 		}
 	
 	}
-//	public void test(final User user) {
-//		JSONObject userJSON=new JSONObject();
-//		try {
-//			userJSON.put("userMailAddress", user.getMailAddr());
-//			userJSON.put("userPassword", user.getPassword());//String
-//			userJSON.put("userInitialInfo", user.getIni());//int[]
-//			userJSON.put("userImage", user.getImage());//Bitmap
-//			
-//			String content=String.valueOf(userJSON);
-//			
-//			System.out.println("哎哎啊"+content);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}//String
-//
-//	}
+
 	public void RegisterRequest(final User user) {
 		new Thread() {public void run() {
 			try {

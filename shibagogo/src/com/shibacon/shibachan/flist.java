@@ -30,9 +30,6 @@ public class flist {
 	}
 	public void setImagepath(String imagepath) {
 		this.imagepath = imagepath;
-	}
-	
-	
-	
+	}	
 
 }

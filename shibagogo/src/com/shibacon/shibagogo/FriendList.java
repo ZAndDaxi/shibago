@@ -30,10 +30,16 @@ import android.widget.SimpleAdapter;
 
 public class FriendList extends Activity {
 	private TreeMap<Integer, flist> fset;
+    private ListView friend_list_ListView;
+    private SimpleAdapter friend_list_SimpleAdapter;
+    private int flag=0;
+    private List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
 	private Handler handler=new Handler() {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
-			fset=JSONParseUtils.getfriendlist((String)msg.obj);}
+			fset=JSONParseUtils.getfriendlist((String)msg.obj);
+			flag=1;
+			showfriendlist();}
 		};
 	};//接收朋友列表
 
@@ -43,29 +49,31 @@ public class FriendList extends Activity {
 			ima=(Bitmap) msg.obj;
 		};
 	};//一一接收图片
-    private ListView friend_list_ListView;
-    private SimpleAdapter friend_list_SimpleAdapter;
-    private List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_list);
         friend_list_ListView = (ListView)findViewById(R.id.friend_list_ListView);
 		friendlistfromserver();
-        for (int i = 0; i < fset.size(); i++) {
-        	getImageView(fset.get(i+1).getImagepath());
-            Map<String, Object> showitem = new HashMap<String, Object>();
-            showitem.put("image", ima);
-            showitem.put("username", fset.get(i+1).getName());
-            showitem.put("level", fset.get(i+1).getLevel());
-            listitem.add(showitem);
-        }
+		
+       
+	}
+	public void showfriendlist() {
+		 for (int i = 0; i < fset.size(); i++) {
+	        	getImageView(fset.get(i+1).getImagepath());
+	            Map<String, Object> showitem = new HashMap<String, Object>();
+	            showitem.put("image", ima);
+	            showitem.put("username", fset.get(i+1).getName());
+	            showitem.put("level", fset.get(i+1).getLevel());
+	            listitem.add(showitem);
+	        }
 
-        friend_list_SimpleAdapter = new SimpleAdapter(this, listitem,
-	        		R.layout.layout_friend_list, new String[]{"image", "username", "level"}, 
-	        		new int[]{R.id.image, R.id.username, R.id.level});
+	        friend_list_SimpleAdapter = new SimpleAdapter(this, listitem,
+		        		R.layout.layout_friend_list, new String[]{"image", "username", "level"}, 
+		        		new int[]{R.id.image, R.id.username, R.id.level});
 
-        friend_list_ListView.setAdapter(friend_list_SimpleAdapter);
+	        friend_list_ListView.setAdapter(friend_list_SimpleAdapter);
 	}
 	public void friendlistfromserver() {
 		new Thread() {public void run() {
@@ -122,7 +130,7 @@ public class FriendList extends Activity {
 	}
 	
 	//jump to addfriend
-	public void addfriend(View view) {
+	public void addafriend(View view) {
 		startActivity(new Intent(FriendList.this,Addfriend.class));
 	}
 

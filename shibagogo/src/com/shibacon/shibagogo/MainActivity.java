@@ -19,7 +19,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	private int plevel=20;
+	private int plevel;
+	////   [1]define   ////////*********************************
+	/*private int numofmission;
+	private TextView tv_numofmi;*/
+	/////*************************************
+	private TextView tv_level;
 	private Handler handler=new Handler() {
 		public void handleMessage(Message msg) {
 		
@@ -27,22 +32,40 @@ public class MainActivity extends Activity {
 				 String l=(String) msg.obj;
 				 Integer i=new Integer(l);
 				 plevel=i.intValue();
+				tv_level.setText(String.valueOf(plevel));
 			}			
 			
 		};
 	};
 	
-
+	///   [3]handle message   /////******************************************************
+//	private Handler handler2=new Handler() {public void handleMessage(Message msg) {
+//		if(msg.what==1) {
+//			String n=(String) msg.obj;
+//			Integer numofm=new Integer(n);
+//			numofmission=numofm.intValue();
+//			tv_numofmi.setText(String.valueOf(numofmission));
+//		}
+//	};};
+	
+	/////////////////////////////////////////////*****************************************************
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		tv_level=findViewById(R.id.level_score);
+		///    [4]get id of the textview shows the number of mission///********************************************
+		//tv_numomi=findViewById(R.id.level_score);
+		//////////////////////********************************************
+		///    [5]            ///********************************************
+		//getmissionnum();
+		//////////////////////********************************************
 		getlevel();
 //		Intent intent=new Intent(this,ShibaService.class);
 //		startService(intent);
-		TextView tv_level=findViewById(R.id.level_score);
-		tv_level.setText(String.valueOf(plevel));
+
+
 	}
 	
 
@@ -92,6 +115,40 @@ public class MainActivity extends Activity {
 			}
 		};}.start();
 	}
+	
+	
+	///////  [2]get number of mission from server    //////////*******************************
+	/*public void getmissionnum() {
+		new Thread() {public void run() {
+			HttpURLConnection conn=null;
+			try {
+				URL url=new URL("");
+				String mytoken=Shibaapp.token;
+				conn=(HttpURLConnection) url.openConnection();
+				conn.setReadTimeout(5000);
+				conn.setRequestMethod("POST");
+				conn.addRequestProperty("Charset", "UTF-8");
+				conn.setDoOutput(true);
+				OutputStream os=conn.getOutputStream();
+				os.write(mytoken.getBytes());
+				os.close();
+				int code=conn.getResponseCode();
+				if(code==200) {
+					InputStream is=conn.getInputStream();
+					String result=StreamUtils.readStream(is);
+					Message msg=Message.obtain();
+					msg.what=1;
+					msg.obj=result;
+					handler2.sendMessage(msg);
+				}
+				
+			} catch (Exception e) {
+		
+				e.printStackTrace();
+			}
+		};}.start();
+	}*/
+	//////////////////****************************************:
 
 }
 
