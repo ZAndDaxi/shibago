@@ -46,6 +46,7 @@ public class Setting extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
 				imagePath=(String) msg.obj;
+				uploadimageview();
 			}
 		};
 	};
@@ -72,7 +73,7 @@ public class Setting extends Activity {
 		setContentView(R.layout.activity_setting);
 		image=(ImageView)findViewById(R.id.image_now);
 		getimagepath();
-		uploadimageview();
+		
 		btn_logout=(Button)findViewById(R.id.log_out);
 		btn_logout.setOnClickListener(new OnClickListener() {
 			

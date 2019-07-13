@@ -65,6 +65,7 @@ public class Newuser extends Activity {
 	private Handler handler=new Handler() {
 		public void handleMessage(Message msg) {
 			messtoken=(String) msg.obj;
+			Shibaapp.token=messtoken;
 		};
 	};
 	
