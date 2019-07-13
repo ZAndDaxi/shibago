@@ -77,9 +77,7 @@ public class Newuser extends Activity {
 		//[1]get mailaddr & pwd
 		et_mailaddress=(EditText)findViewById(R.id.mailaddress1);
 		et_password=(EditText)findViewById(R.id.password1);
-		
-		mailaddr=et_mailaddress.getText().toString().trim();
-		password=et_password.getText().toString().trim();
+
 	    //[2]transit to imageupload;
 		btn_next1=(Button)findViewById(R.id.nexttoimage);
 		btn_next1.setOnClickListener(new OnClickListener() {
@@ -87,6 +85,9 @@ public class Newuser extends Activity {
 			@Override
 			public void onClick(View v) {
 		
+				
+				mailaddr=et_mailaddress.getText().toString().trim();
+				password=et_password.getText().toString().trim();
 				setContentView(R.layout.image_initialize);
 				//[3]upload an image
 				image_upload=(ImageView)findViewById(R.id.uploadimage);
@@ -108,22 +109,6 @@ public class Newuser extends Activity {
 					public void onClick(View arg0) {
 						// 用户喜好获取
 						setContentView(R.layout.user_initialization);
-						rg1=(RadioGroup)findViewById(R.id.radioGroup1);
-						rg2=(RadioGroup)findViewById(R.id.radioGroup2);
-						rg3=(RadioGroup)findViewById(R.id.radioGroup3);
-						rg4=(RadioGroup)findViewById(R.id.radioGroup4);
-						if(rg1.getCheckedRadioButtonId()==R.id.btnNo) {
-							initial[0]=0;
-						}
-						if(rg2.getCheckedRadioButtonId()==R.id.btnNo2) {
-							initial[1]=0;
-						}
-						if(rg3.getCheckedRadioButtonId()==R.id.btnNo3) {
-							initial[2]=0;
-						}
-						if(rg4.getCheckedRadioButtonId()==R.id.btnNo4) {
-							initial[3]=0;
-						}
 						
 						//[5]upload to server
 						submit=(Button)findViewById(R.id.button_submit);
@@ -131,7 +116,22 @@ public class Newuser extends Activity {
 							
 							@Override
 							public void onClick(View v) {
-						
+								rg1=(RadioGroup)findViewById(R.id.radioGroup1);
+								rg2=(RadioGroup)findViewById(R.id.radioGroup2);
+								rg3=(RadioGroup)findViewById(R.id.radioGroup3);
+								rg4=(RadioGroup)findViewById(R.id.radioGroup4);
+								if(rg1.getCheckedRadioButtonId()==R.id.btnNo) {
+									initial[0]=0;
+								}
+								if(rg2.getCheckedRadioButtonId()==R.id.btnNo2) {
+									initial[1]=0;
+								}
+								if(rg3.getCheckedRadioButtonId()==R.id.btnNo3) {
+									initial[2]=0;
+								}
+								if(rg4.getCheckedRadioButtonId()==R.id.btnNo4) {
+									initial[3]=0;
+								}
 								uploadAll(bitmap, mailaddr, password, initial);
 								Intent i=new Intent(Newuser.this,MainActivity.class);
 								startActivity(i);
