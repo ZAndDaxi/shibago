@@ -17,11 +17,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Addfriend extends Activity {
-	private String friendname;
+	private TextView friendname;
 
+	private Button btn_addfriend;
 	private Handler handler=new Handler() {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
@@ -34,6 +39,17 @@ public class Addfriend extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addfriend);
+		friendname=(TextView)findViewById(R.id.search_friend_id);
+		btn_addfriend=(Button)findViewById(R.id.add_friend);
+		btn_addfriend.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				afriend newfriend=new afriend(friendname.getText().toString(),Shibaapp.token);
+				addfriend(newfriend);
+				
+			}
+		});
 	}
 	
 	public void addfriend(final afriend af) {
