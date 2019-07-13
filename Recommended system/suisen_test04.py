@@ -214,8 +214,10 @@ class LSTM_recommend:
 
         self.lstm_model.save('test.h5')
 
-    def test(self):
+    def test(self, inpput):
         self.lstm_model.load_weights('test.h5')
+        com = self.lstm_model.predict(inpput)     
+        return com
 """
 
 def main():
