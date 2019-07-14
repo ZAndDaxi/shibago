@@ -41,7 +41,7 @@ public class FriendList extends Activity {
 			if(msg.what==1) {
 			fset=JSONParseUtils.getfriendlist((String)msg.obj);
 			for(int i=0;i<fset.size();i++) {
-				getImageView(fset.get(i+1).getImagepath());
+				getImageView(fset.get(i).getImagepath());
 			}
 			}
 		};
@@ -72,8 +72,8 @@ public class FriendList extends Activity {
 	public void showfriendlist() {
 		 for (int i = 0; i < fset.size(); i++) {
 	        	showitem.put("image", imalist.get(i));         
-	            showitem.put("username", fset.get(i+1).getName());
-	            showitem.put("level", fset.get(i+1).getLevel());
+	            showitem.put("username", fset.get(i).getName());
+	            showitem.put("level", fset.get(i).getLevel());
 	            listitem.add(showitem);
 	        }
 		 
