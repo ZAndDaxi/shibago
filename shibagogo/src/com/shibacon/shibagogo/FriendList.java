@@ -32,6 +32,7 @@ public class FriendList extends Activity {
 	private TreeMap<Integer, flist> fset;
     private ListView friend_list_ListView;
     private SimpleAdapter friend_list_SimpleAdapter;
+    private List<Bitmap> imalist=new ArrayList<Bitmap>();
     
     private Map<String, Object> showitem = new HashMap<String, Object>();
     private List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
@@ -39,13 +40,9 @@ public class FriendList extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
 			fset=JSONParseUtils.getfriendlist((String)msg.obj);
-			 for (int i = 0; i < fset.size(); i++) {
-		        	getImageView(fset.get(i+1).getImagepath());          
-		            showitem.put("username", fset.get(i+1).getName());
-		            showitem.put("level", fset.get(i+1).getLevel());
-		            listitem.add(showitem);
-		        }
-			showfriendlist();
+			for(int i=0;i<fset.size();i++) {
+				getImageView(fset.get(i+1).getImagepath());
+			}
 			}
 		};
 	};//接收朋友列表
@@ -54,7 +51,12 @@ public class FriendList extends Activity {
 	private Handler handlerforimage=new Handler() {
 		public void handleMessage(Message msg) {
 			ima=(Bitmap) msg.obj;
-            showitem.put("image", ima);
+			imalist.add(ima);
+			if(imalist.size()<fset.size()) {
+				//
+			}else {
+				showfriendlist();
+			}
 		};
 	};//一一接收图片
 
@@ -68,6 +70,13 @@ public class FriendList extends Activity {
        
 	}
 	public void showfriendlist() {
+		 for (int i = 0; i < fset.size(); i++) {
+	        	showitem.put("image", imalist.get(i));         
+	            showitem.put("username", fset.get(i+1).getName());
+	            showitem.put("level", fset.get(i+1).getLevel());
+	            listitem.add(showitem);
+	        }
+		 
 	        friend_list_SimpleAdapter = new SimpleAdapter(this, listitem,
 		        		R.layout.layout_friend_list, new String[]{"image", "username", "level"}, 
 		        		new int[]{R.id.image, R.id.username, R.id.level});
