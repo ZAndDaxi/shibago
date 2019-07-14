@@ -31,7 +31,19 @@ public class LogIn extends Activity {
 
 	private Handler handler=new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			messtoken=(String)msg.obj;
+			messtoken=(String)msg.obj;					
+			if(canfind(messtoken)) {
+				Shibaapp.token=messtoken;
+				SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
+				Editor editor=sp.edit();
+				editor.putInt("login", 1);
+				editor.putString("token", Shibaapp.token);
+				editor.commit();
+				Intent i=new Intent(LogIn.this,MainActivity.class);
+				startActivity(i);
+			}else {
+					Toast.makeText(LogIn.this, "入力間違いました", Toast.LENGTH_SHORT).show();
+			}
 		};
 	};
 
@@ -79,21 +91,7 @@ public class LogIn extends Activity {
 					}
 					LoginRequest(mailaddr, pwd);
 
-					if(canfind(messtoken)) {
-						Shibaapp.token=messtoken;
-						SharedPreferences sp=getSharedPreferences("config", MODE_PRIVATE);
-						Editor editor=sp.edit();
-						editor.putInt("login", 1);
-						editor.putString("token", Shibaapp.token);
-						editor.commit();
-						Intent i=new Intent(LogIn.this,MainActivity.class);
-						startActivity(i);
-						return;
-					
-						}else {
-							Toast.makeText(LogIn.this, "入力間違いました", Toast.LENGTH_SHORT).show();
-							return;
-						}
+
 					}
 	
 
