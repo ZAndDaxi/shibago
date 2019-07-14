@@ -37,8 +37,8 @@ def make_p2():
 
 def make_place():
     ID = ['0001', '0002', '0003', '0004', '0005']
-    index_ls = ['Home', 'School', 'Meat_ya', 'Vegetable_ya', 'Restraunt']
-    zahyou_index_ls = [[34.9929507,135.9594109], [34.9821826,135.9610467], [35.0037532,135.9492156],
+    index_ls = ['Home', 'Creation core', 'Yakiniku', 'Gyomu super', 'Union Shop']
+    zahyou_index_ls = [[34.9929507,135.9594109], [34.9796629,135.9629054], [35.0037532,135.9492156],
                        [34.9953994,135.9506403], [34.9814415,135.9612911]]
     Home_label = [0.2, 0.2, 0.2, 0.2] #Study, Meat, Vegetable, Sports
     School_label = [0.1, 0.2, 0.2, 0.5]
