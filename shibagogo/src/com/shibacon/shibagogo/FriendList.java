@@ -40,30 +40,17 @@ public class FriendList extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
 			fset=JSONParseUtils.getfriendlist((String)msg.obj);
-			for(int i=0;i<fset.size();i++) {
-				getImageView(fset.get(i+1).getImagepath());
-			}
+			showfriendlist();
 			}
 		};
 	};//接收朋友列表
 
-	//////////****************用于测试找bug   test
-	private ImageView testimage;
-	/////////////////////***************************************
 	
 	private Bitmap ima;
 	private Handler handlerforimage=new Handler() {
 		public void handleMessage(Message msg) {
 			ima=(Bitmap) msg.obj;
 			imalist.add(ima);
-			//////////////////////**************用于测试
-			testimage.setImageBitmap(ima);
-			///////////////////////////************************************：
-			if(imalist.size()<fset.size()) {
-				//
-			}else {
-				showfriendlist();
-			}
 		};
 	};//一一接收图片
 
@@ -71,8 +58,6 @@ public class FriendList extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_list);
-		//////////////////*******************：测试
-		testimage=findViewById(R.id.testimage);
 
         friend_list_ListView = (ListView)findViewById(R.id.friend_list_ListView);
 		friendlistfromserver();
@@ -81,7 +66,7 @@ public class FriendList extends Activity {
 	}
 	public void showfriendlist() {
 		 for (int i = 0; i < fset.size(); i++) {
-	        	showitem.put("image", imalist.get(i+1));         
+	        	showitem.put("image", ima);         
 	            showitem.put("username", fset.get(i+1).getName());
 	            showitem.put("level", fset.get(i+1).getLevel());
 	            listitem.add(showitem);
