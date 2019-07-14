@@ -40,7 +40,11 @@ public class FriendList extends Activity {
 		public void handleMessage(Message msg) {
 			if(msg.what==1) {
 			fset=JSONParseUtils.getfriendlist((String)msg.obj);
-			showfriendlist();
+			//showfriendlist();
+			for(int i=0;i<fset.size();i++) {
+				final String m=fset.get(i+1).getImagepath();
+				getImageView(m);
+			}
 			}
 		};
 	};//接收朋友列表
@@ -51,6 +55,7 @@ public class FriendList extends Activity {
 		public void handleMessage(Message msg) {
 			ima=(Bitmap) msg.obj;
 			imalist.add(ima);
+			if(imalist.size()>=fset.size()) {showfriendlist();}
 		};
 	};//一一接收图片
 
@@ -66,7 +71,7 @@ public class FriendList extends Activity {
 	}
 	public void showfriendlist() {
 		 for (int i = 0; i < fset.size(); i++) {
-	        	showitem.put("image", ima);         
+	        	showitem.put("image", imalist.get(i));         
 	            showitem.put("username", fset.get(i+1).getName());
 	            showitem.put("level", fset.get(i+1).getLevel());
 	            listitem.add(showitem);
